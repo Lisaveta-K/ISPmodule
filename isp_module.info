@@ -1,0 +1,3 @@
+name = ISP module
+description = ISP module shows ssl certificates list
+core = 7.x
