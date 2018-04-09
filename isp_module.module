@@ -1,3 +1,14 @@
 <?php 
-echo "string";
+/**
+ * Implements hook_help().
+ *
+ * Displays help and module information.
+ */
+function isp_module_help($path, $arg) {
+  switch ($path) {
+    case "admin/help#isp_module":
+      return t("Shows ssl certificates list"); 
+      break; 
+  }
+}
 ?>
