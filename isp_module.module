@@ -22,7 +22,7 @@ function isp_module_menu() {
     'title' => 'ISP SSL list',
     'description' => 'Configuration for ISP module. SSL list.',
     'page callback' => 'isp_module_page_content',
-    'access arguments' => array('access administration pages'),
+    'access arguments' => array('access administration page'),
     'type' => MENU_NORMAL_ITEM,
   );
 
