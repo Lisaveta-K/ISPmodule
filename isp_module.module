@@ -11,4 +11,31 @@ function isp_module_help($path, $arg) {
       break; 
   }
 }
+
+/**
+ * Implements hook_menu().
+ */
+function isp_module_menu() {
+  $items = array();
+
+  $items['admin/config/development/isp_module'] = array(
+    'title' => 'ISP SSL list',
+    'description' => 'Configuration for ISP module. SSL list.',
+    'page callback' => 'isp_module_page_content',
+    'access arguments' => array('access administration pages'),
+    'type' => MENU_NORMAL_ITEM,
+  );
+
+  return $items;
+}
+
+/**
+ * Page callback: ISP module settings
+ */
+/**
+ * Simple page content.
+ */
+function isp_module_page_content() {
+  return 'Content of a page';
+}
 ?>
