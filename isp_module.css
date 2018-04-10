@@ -64,3 +64,15 @@
 .ssl-cert__image--Thawte{
 	background-image: url(images/thawte.png);
 }
+
+.ssl-cert__options {
+	display: flex;
+}
+.ssl-cert__trust {
+	margin-right: 5px;
+	border-radius: 3px;
+}
+
+.ssl-cert__trust:last-child {
+	margin-right: 0;
+}
