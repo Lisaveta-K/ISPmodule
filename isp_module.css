@@ -1,0 +1,66 @@
+.ssl-cert {
+	background-color: #f1f2f1;
+}
+
+.ssl-cert__list {
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-box-orient: vertical;
+	-webkit-box-direction: normal;
+	-webkit-flex-direction: column;
+	-ms-flex-direction: column;
+    flex-direction: column;
+	padding: 25px 0;
+}
+
+.ssl-cert__item {
+	background-color: #FFF;
+	padding: 15px;
+	border-right: 10px solid #30b999;
+	width: 60%;
+	margin: 0 auto 20px auto;
+	border-radius: 3px;
+	-webkit-box-shadow: 0px 14px 10px -12px rgba(194,194,194,0.6);
+	-moz-box-shadow: 0px 14px 10px -12px rgba(194,194,194,0.6);
+	box-shadow: 0px 14px 10px -12px rgba(194,194,194,0.6);
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-box-align: start;
+    -webkit-align-items: flex-start;
+        -ms-flex-align: start;
+            align-items: flex-start;
+}
+
+.ssl-cert__item h3 {
+	color: #34495d;
+	margin: 0 0 10px 0;
+
+}
+
+.ssl-cert__image {
+	background-repeat: no-repeat;
+	background-size: contain;
+	width: 36px;
+	height: 36px;
+	background-image: url(images/rapidssl.png);
+	margin-right: 40px;
+}
+
+.ssl-cert__image--Comodo{
+	background-image: url(images/comodo.png);
+}
+
+.ssl-cert__image--GeoTrust{
+	background-image: url(images/geotrust.png);
+}
+
+.ssl-cert__image--RapidSSL{
+	background-image: url(images/rapidssl.png);
+}
+.ssl-cert__image--Thawte{
+	background-image: url(images/thawte.png);
+}

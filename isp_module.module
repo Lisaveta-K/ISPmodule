@@ -36,6 +36,17 @@ function isp_module_menu() {
  * Simple page content.
  */
 function isp_module_page_content() {
-  return 'Content of a page';
+  $base = drupal_get_path('module', 'isp_module');
+  $css_path = $base .'/isp_module.css';
+  $js_path = $base .'/isp_module.js';
+  drupal_add_css($css_path);
+  drupal_add_js($js_path);
+
+  $output = '<section class="ssl-cert">';
+  $output .= '<div class="ssl-cert__list">';
+  $output .= '</div></section>';
+
+
+  return $output;
 }
 ?>
