@@ -19,7 +19,9 @@ Drupal.behaviors.isp_module = {
         var subdomains = '<div class="ssl-cert__trust ssl-cert__trust--sub">subdomains</div>';
         var trust_output;
         var multidomain_ouput;
+        var multidomain_bulean;
         var subdomain_ouput;
+        var subdomain_bulean;
         var note_output;
         for (i = 0; i <= ssl_count; i++) {
           //Checking trust value for current item
@@ -40,20 +42,192 @@ Drupal.behaviors.isp_module = {
 
           if (json.ssllist[i].multidomain === 'true') {
               multidomain_ouput = multidomain;
+              multidomain_bulean = "true";
           } else {
               multidomain_ouput = '';
+              multidomain_bulean = "false";
           }
           if (json.ssllist[i].subdomains === 'true') {
               subdomain_ouput = subdomains;
+              subdomain_bulean = "true";
           } else {
               subdomain_ouput = '';
+              subdomain_bulean = "false";
           }
 
           item_name = json.ssllist[i].owner;
           //adding item
-          $('.ssl-cert__list').append('<div class="ssl-cert__item"><div class="ssl-cert__image ssl-cert__image--' + item_name + '"></div><div class="ssl-cert__info"><h3>' + json.ssllist[i].name + '</h3><div class="ssl-cert__options">'+ trust_output + multidomain_ouput + subdomain_ouput +'</div><p>'+ note_output +'</p></div></div>');
+          $('.ssl-cert__list').append('<div class="ssl-cert__item" data-trust="'+ trust +'" data-multi="'+ multidomain_bulean +'" data-sub="' + subdomain_bulean +'"><div class="ssl-cert__image ssl-cert__image--' + item_name + '"></div><div class="ssl-cert__info"><h3>' + json.ssllist[i].name + '</h3><div class="ssl-cert__options">'+ trust_output + multidomain_ouput + subdomain_ouput +'</div><p>'+ note_output +'</p></div></div>');
         }
       });
+    });
+
+    function toggleMessage() {
+      if ($('.ssl-cert__list').children(':visible').length == 0) {
+        $('.ssl-cert__list').append('<div class="message"><h2>Не найдено сертификатов, соответствующих запросу</h2><p>Очистите фильтр, и попробуйте ещё раз.</p>')
+      } else {
+        $('.message').remove();
+      } 
+    }
+
+    $('#trust-level').change( function() {
+        $('#use').val('default');
+        $('.ssl-cert__item').each(function(index) {
+          if ($('#checkbox-sub').is(":checked")) {
+            if (($(this).data("trust") === $('#trust-level').val()) && ($(this).hasClass("sub"))) {
+                $(this).show();
+                $(this).addClass("selected");
+            }else{
+              $(this).hide();
+              $(this).removeClass("selected");
+            }
+          } else if ($('#checkbox-multi').is(":checked")){
+            if (($(this).data("trust") === $('#trust-level').val()) && ($(this).hasClass("multi"))) {
+                $(this).show();
+                $(this).addClass("selected");
+            } else {
+              $(this).hide();
+              $(this).removeClass("selected");
+            }
+          } else if ($('#checkbox-sub').is(":checked") && $('#checkbox-multi').is(":checked")) {
+              if (($(this).data("trust") === $('#trust-level').val()) && ($(this).hasClass("multi")) && ($(this).hasClass("sub"))) {
+                $(this).show();
+                $(this).addClass("selected");
+            } else {
+              $(this).hide();
+              $(this).removeClass("selected");
+            }
+          } else {
+            if ($(this).data("trust").toString() === $('#trust-level').val().toString()) {
+                $(this).show();
+                $(this).addClass("selected");
+            }else{
+              $(this).hide();
+              $(this).removeClass("selected");
+            }
+          }
+        });
+        toggleMessage();
+    });
+
+    $('#use').change( function() {
+        $('#trust-level').val('default');
+        $('.ssl-cert__item').each(function(index) {
+          if ($('#checkbox-sub').is(":checked")) {
+            if (($(this).data("trust").toString() === $('#use').val().toString()) && ($(this).hasClass("sub"))) {
+                $(this).show();
+                $(this).addClass("selected");
+            } else{ 
+              $(this).hide();
+              $(this).removeClass("selected");
+            }
+          } else if ($('#checkbox-multi').is(":checked")) {
+              if (($(this).data("trust").toString() === $('#use').val().toString()) && ($(this).hasClass("multi"))) {
+                  $(this).show();
+                  $(this).addClass("selected");
+              }else{
+                $(this).hide();
+                $(this).removeClass("selected");
+              }
+          } else if ($('#checkbox-sub').is(":checked") && $('#checkbox-multi').is(":checked")) {
+              if (($(this).data("trust").toString() === $('#use').val().toString()) && ($(this).hasClass("multi")) && ($(this).hasClass("sub"))) {
+                  $(this).show();
+                  $(this).addClass("selected");
+              }else{
+                $(this).hide();
+                $(this).removeClass("selected");
+              }
+          } else {
+            if ($(this).data("trust").toString() === $('#use').val().toString()) {
+                $(this).show();
+                $(this).addClass("selected");
+            }else{
+              $(this).hide();
+              $(this).removeClass("selected");
+            }
+          }
+        });
+        toggleMessage();
+    });
+
+    $( '#checkbox-sub').change(function() {
+       $('.ssl-cert__item').each(function(index) {
+            if (($('#trust-level').val().toString() != "") || ($('#use').val().toString() != "")) {
+              if ($('#checkbox-sub').is(":checked")) {
+                if (($(this).data("sub").toString() === "true") && ($(this).hasClass("selected"))) {
+                  $(this).show();
+                  $(this).addClass("sub");
+                } else {
+                  $(this).hide();
+                  $(this).removeClass("sub");
+                }
+              } else {
+                if ($(this).hasClass("selected")) { $(this).show() }
+                $(this).removeClass("sub");
+              }
+            } else {
+              if ($('#checkbox-sub').is(":checked")) {
+                  if ($(this).data("sub").toString() === "true") {
+                    $(this).show();
+                    $(this).addClass("sub");
+                  } else {
+                    $(this).hide();
+                    $(this).removeClass("sub");
+
+                  }
+              } else {
+                $(this).show();
+                $(this).removeClass("sub");
+              }
+            }
+        });
+       toggleMessage();
+    });
+
+
+  $( '#checkbox-multi').change(function() {
+       $('.ssl-cert__item').each(function(index) {
+            if (($('#trust-level').val().toString() != "") || ($('#use').val().toString() != "")) {
+              if ($('#checkbox-multi').is(":checked")) {
+                if (($(this).data("multi").toString() === "true") && ($(this).hasClass("selected"))) {
+                  $(this).show();
+                  $(this).addClass("multi");
+                }else{
+                  $(this).hide();
+                  $(this).removeClass("multi");
+                }
+              } else {
+                if ($(this).hasClass("selected")) { $(this).show() }
+                $(this).removeClass("multi");
+              }
+            } else {
+              if ($('#checkbox-multi').is(":checked")) {
+                  if ($(this).data("multi").toString() === "true") {
+                    $(this).show();
+                    $(this).addClass("multi");
+                  } else {
+                    $(this).hide();
+                    $(this).removeClass("multi");
+                  }
+              } else {
+                $(this).show();
+                $(this).removeClass("multi");
+              }
+            }
+        });
+       toggleMessage();
+    });
+
+
+    $('#filter-clear').click(function(event) {
+        event.preventDefault();
+        $('select').val('default');
+        $( '#checkbox-sub').attr('checked', false);
+        $( '#checkbox-multi').attr('checked', false);
+        $('.ssl-cert__item').each(function(index) {
+            $(this).show();
+        });
+        toggleMessage();
     });
   }
 };

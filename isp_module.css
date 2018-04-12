@@ -2,6 +2,48 @@
 	background-color: #f1f2f1;
 }
 
+.ssl-cert__filters {
+	-webkit-box-shadow: inset -4px 11px 9px -12px rgba(173,173,173,1);
+	-moz-box-shadow: inset -4px 11px 9px -12px rgba(173,173,173,1);
+	box-shadow: inset -4px 11px 9px -12px rgba(173,173,173,1);
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-box-pack: justify;
+    -webkit-justify-content: space-between;
+        -ms-flex-pack: justify;
+            justify-content: space-between;
+    padding: 30px 40px;
+    background-color: #fff;
+}
+
+.ssl-cert__filters label {
+    display: inline-block;
+    font-weight: normal;
+    color: #536577;
+    cursor: pointer;
+}
+
+.ssl-cert__filters input {
+	display: inline-block;
+	margin-right: 3px;
+	cursor: pointer;
+}
+
+.ssl-cert__filters a {
+	color: #379ddb;
+	text-decoration: none;
+}
+
+.ssl-cert__filters select {
+    background: #fff;
+    border: 1px solid;
+    border-radius: 1px;
+    padding: 3px 10px;
+    color: #536577;
+}
+
 .ssl-cert__list {
 	display: -webkit-box;
 	display: -webkit-flex;
@@ -13,6 +55,14 @@
 	-ms-flex-direction: column;
     flex-direction: column;
 	padding: 25px 0;
+}
+
+.ssl-cert__list .message {
+	text-align: center;
+}
+
+.ssl-cert__list h2 {
+	color: #fe1c34;
 }
 
 .ssl-cert__item {

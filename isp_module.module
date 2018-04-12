@@ -43,6 +43,26 @@ function isp_module_page_content() {
   drupal_add_js($js_path);
 
   $output = '<section class="ssl-cert">';
+  $output .= '<div class="ssl-cert__filters">';
+  $output .= '<select id="trust-level">';
+  $output .= '<option value="default" selected="selected" disabled>Выберете уровень доверия</option>';
+  $output .= '<option value="DV">DV: Проверка домена</option>';
+  $output .= '<option value="OV">OV: Проверка компании</option>';
+  $output .= '<option value="EV">EV: Расширенная проверка</option>';
+  $output .= '</select>';
+  $output .= '<select id="use">';
+  $output .= '<option value="default" selected="selected" disabled>Или укажите приминение</option>';
+  $output .= '<option value="DV">для частных лиц</option>';
+  $output .= '<option value="OV">для сайтов компаний</option>';
+  $output .= '<option value="EV">для онлайн-торговли</option>';
+  $output .= '<option value="EV">для банков и страховых</option>';
+  $output .= '</select>';
+  $output .= '<span><input type="checkbox" name="checkbox-sub" id="checkbox-sub">';
+  $output .= '<label for="checkbox-sub">Поддомены</label></span>';
+  $output .= '<span><input type="checkbox" name="checkbox-multi" id="checkbox-multi">';
+  $output .= '<label for="checkbox-multi">Много доменов</label></span>';
+  $output .= '<a href="" id="filter-clear">Очистить фильтр</a>';
+  $output .= '</div>';
   $output .= '<div class="ssl-cert__list">';
   $output .= '</div></section>';
 
