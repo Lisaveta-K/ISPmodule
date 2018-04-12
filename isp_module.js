@@ -64,7 +64,7 @@ Drupal.behaviors.isp_module = {
 
     function toggleMessage() {
       if ($('.ssl-cert__list').children(':visible').length == 0) {
-        $('.ssl-cert__list').append('<div class="message"><h2>Не найдено сертификатов, соответствующих запросу</h2><p>Очистите фильтр, и попробуйте ещё раз.</p>')
+        $('.ssl-cert__list').append('<div class="message"><h2>Не найдено сертификатов, соответствующих запросу</h2><p><a href="" class="filter-clear">Очистите фильтр</a>, и попробуйте ещё раз.</p>')
       } else {
         $('.message').remove();
       } 
@@ -77,7 +77,7 @@ Drupal.behaviors.isp_module = {
             if (($(this).data("trust") === $('#trust-level').val()) && ($(this).hasClass("sub"))) {
                 $(this).show();
                 $(this).addClass("selected");
-            }else{
+            } else {
               $(this).hide();
               $(this).removeClass("selected");
             }
@@ -162,9 +162,42 @@ Drupal.behaviors.isp_module = {
                   $(this).removeClass("sub");
                 }
               } else {
-                if ($(this).hasClass("selected")) { $(this).show() }
-                $(this).removeClass("sub");
+                if ($(this).hasClass("selected")) { 
+                  $(this).show() 
+                  $(this).removeClass("sub");
+                }
               }
+            } else if ($('#checkbox-multi').is(":checked")) {
+                if ($('#checkbox-sub').is(":checked")) {
+                  if (($(this).data("sub").toString() === "true") && ($(this).hasClass("multi"))) {
+                    $(this).show();
+                    $(this).addClass("sub");
+                  } else {
+                    $(this).hide();
+                    $(this).removeClass("sub");
+                  }
+                } else {
+                  if ($(this).hasClass("multi")) { $(this).show() }
+                  $(this).removeClass("sub");
+                }
+            } else if ($('#checkbox-multi').is(":checked") && (($('#trust-level').val().toString() != "") || ($('#use').val().toString() != ""))) {
+                if ($('#checkbox-sub').is(":checked")) {
+                  if (($(this).data("sub").toString() == "true") && ($(this).hasClass("multi")) && ($(this).hasClass("selected"))) {
+                    $(this).show();
+                    $(this).addClass("sub");
+                  } else {
+                    $(this).hide();
+                    $(this).removeClass("sub");
+                  }
+                } else {
+                  if ($(this).hasClass("selected") && $(this).hasClass("multi")) { 
+                    $(this).show() 
+                    $(this).removeClass("sub");
+                  } else {
+                    $(this).hide() 
+                    $(this).removeClass("sub");
+                  }
+                }
             } else {
               if ($('#checkbox-sub').is(":checked")) {
                   if ($(this).data("sub").toString() === "true") {
@@ -197,8 +230,41 @@ Drupal.behaviors.isp_module = {
                   $(this).removeClass("multi");
                 }
               } else {
-                if ($(this).hasClass("selected")) { $(this).show() }
+                if ($(this).hasClass("selected")) { 
+                  $(this).show() 
+                  $(this).removeClass("multi");
+                }
+              }
+            } else if ($('#checkbox-sub').is(":checked")) {
+              if ($('#checkbox-multi').is(":checked")) {
+                if (($(this).data("multi").toString() === "true") && ($(this).hasClass("sub"))) {
+                  $(this).show();
+                  $(this).addClass("multi");
+                }else{
+                  $(this).hide();
+                  $(this).removeClass("multi");
+                }
+              } else {
+                if ($(this).hasClass("sub")) { $(this).show() }
                 $(this).removeClass("multi");
+              }
+            } else if ($('#checkbox-sub').is(":checked") && ($('#trust-level').val().toString() != "") || ($('#use').val().toString() != "")) {
+                if ($('#checkbox-multi').is(":checked")) {
+                if (($(this).data("multi").toString() === "true") && ($(this).hasClass("sub")) && ($(this).hasClass("selected"))) {
+                  $(this).show();
+                  $(this).addClass("multi");
+                } else {
+                  $(this).hide();
+                  $(this).removeClass("multi");
+                }
+              } else {
+                if ($(this).hasClass("sub") && ($(this).hasClass("selected"))) { 
+                  $(this).show() 
+                  $(this).removeClass("multi");
+                } else {
+                  $(this).hide();
+                  $(this).removeClass("multi");
+                }
               }
             } else {
               if ($('#checkbox-multi').is(":checked")) {
@@ -219,12 +285,12 @@ Drupal.behaviors.isp_module = {
     });
 
 
-    $('#filter-clear').click(function(event) {
+    $('.filter-clear').click(function(event) {
         event.preventDefault();
         $('select').val('default');
         $( '#checkbox-sub').attr('checked', false);
         $( '#checkbox-multi').attr('checked', false);
-        $('.ssl-cert__item').each(function(index) {
+        $( '.ssl-cert__item').each(function(index) {
             $(this).show();
         });
         toggleMessage();

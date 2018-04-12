@@ -61,7 +61,7 @@ function isp_module_page_content() {
   $output .= '<label for="checkbox-sub">Поддомены</label></span>';
   $output .= '<span><input type="checkbox" name="checkbox-multi" id="checkbox-multi">';
   $output .= '<label for="checkbox-multi">Много доменов</label></span>';
-  $output .= '<a href="" id="filter-clear">Очистить фильтр</a>';
+  $output .= '<a href="#" class="filter-clear">Очистить фильтр</a>';
   $output .= '</div>';
   $output .= '<div class="ssl-cert__list">';
   $output .= '</div></section>';
