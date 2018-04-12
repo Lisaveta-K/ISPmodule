@@ -17,7 +17,7 @@
 
 .ssl-cert__item {
 	background-color: #FFF;
-	padding: 15px;
+	padding: 30px 0 18px 40px;
 	border-right: 10px solid #30b999;
 	width: 60%;
 	margin: 0 auto 20px auto;
@@ -39,6 +39,24 @@
 	color: #34495d;
 	margin: 0 0 10px 0;
 
+}
+
+.ssl-cert__item p {
+	margin: 0;
+	color: #536577;
+	line-height: 20px;
+}
+
+.ssl-cert__item p:before {
+	content: '';
+	display: inline-block;
+	background-image: url(images/tick.svg);
+	background-size: cover;
+	background-repeat: no-repeat;
+	height: 16px;
+	width: 16px;
+	vertical-align: top;
+	margin: 3px 3px 0 0;
 }
 
 .ssl-cert__image {
@@ -67,12 +85,40 @@
 
 .ssl-cert__options {
 	display: flex;
+	margin-bottom: 6px;
 }
 .ssl-cert__trust {
 	margin-right: 5px;
 	border-radius: 3px;
+	padding: 0 10px;
+    border: 1px solid;
+    font-weight: bold;
+    line-height: 18px;
 }
 
 .ssl-cert__trust:last-child {
 	margin-right: 0;
+}
+
+.ssl-cert__trust--dv,
+.ssl-cert__trust--sub {
+	color: #696a69;
+	border-color: #696a69;
+}
+
+.ssl-cert__trust--ov {
+	color: #fff;
+	border-color: #34495e;
+	background-color: #34495e;
+}
+
+.ssl-cert__trust--ev {
+	color: #fff;
+	border-color: #30ba9a;
+	background-color: #30ba9a;
+}
+
+.ssl-cert__trust--multi {
+	border-color: #30ba9a;
+	color: #30ba9a;
 }
