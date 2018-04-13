@@ -160,6 +160,7 @@ Drupal.behaviors.isp_module = {
                   } else {
                     $(this).hide();
                     $(this).removeClass("sub");
+                    toggleMessage();
                   }
                 } else {
                   if ($(this).hasClass("selected") && $(this).hasClass("multi")) { 
@@ -168,6 +169,7 @@ Drupal.behaviors.isp_module = {
                   } else {
                     $(this).hide() 
                     $(this).removeClass("sub");
+                    toggleMessage();
                   }
                 }
             } else if (($('#trust-level').val().toString() != "") || ($('#use').val().toString() != "")) {
@@ -228,6 +230,7 @@ Drupal.behaviors.isp_module = {
                 } else {
                   $(this).hide();
                   $(this).removeClass("multi");
+                  toggleMessage();
                 }
               } else {
                 if ($(this).hasClass("sub") && ($(this).hasClass("selected"))) { 
@@ -236,6 +239,7 @@ Drupal.behaviors.isp_module = {
                 } else {
                   $(this).hide();
                   $(this).removeClass("multi");
+                  toggleMessage();
                 }
               }
             } else if (($('#trust-level').val().toString() != "") || ($('#use').val().toString() != "")) {
