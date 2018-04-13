@@ -152,7 +152,25 @@ Drupal.behaviors.isp_module = {
 
     $( '#checkbox-sub').change(function() {
        $('.ssl-cert__item').each(function(index) {
-            if (($('#trust-level').val().toString() != "") || ($('#use').val().toString() != "")) {
+              if ($('#checkbox-multi').is(":checked") && (($('#trust-level').val().toString() != "") || ($('#use').val().toString() != ""))) {
+                if ($('#checkbox-sub').is(":checked")) {
+                  if (($(this).data("sub").toString() === "true") && ($(this).hasClass("multi")) && ($(this).hasClass("selected"))) {
+                    $(this).show();
+                    $(this).addClass("sub");
+                  } else {
+                    $(this).hide();
+                    $(this).removeClass("sub");
+                  }
+                } else {
+                  if ($(this).hasClass("selected") && $(this).hasClass("multi")) { 
+                    $(this).show() 
+                    $(this).removeClass("sub");
+                  } else {
+                    $(this).hide() 
+                    $(this).removeClass("sub");
+                  }
+                }
+            } else if (($('#trust-level').val().toString() != "") || ($('#use').val().toString() != "")) {
               if ($('#checkbox-sub').is(":checked")) {
                 if (($(this).data("sub").toString() === "true") && ($(this).hasClass("selected"))) {
                   $(this).show();
@@ -180,24 +198,6 @@ Drupal.behaviors.isp_module = {
                   if ($(this).hasClass("multi")) { $(this).show() }
                   $(this).removeClass("sub");
                 }
-            } else if ($('#checkbox-multi').is(":checked") && (($('#trust-level').val().toString() != "") || ($('#use').val().toString() != ""))) {
-                if ($('#checkbox-sub').is(":checked")) {
-                  if (($(this).data("sub").toString() == "true") && ($(this).hasClass("multi")) && ($(this).hasClass("selected"))) {
-                    $(this).show();
-                    $(this).addClass("sub");
-                  } else {
-                    $(this).hide();
-                    $(this).removeClass("sub");
-                  }
-                } else {
-                  if ($(this).hasClass("selected") && $(this).hasClass("multi")) { 
-                    $(this).show() 
-                    $(this).removeClass("sub");
-                  } else {
-                    $(this).hide() 
-                    $(this).removeClass("sub");
-                  }
-                }
             } else {
               if ($('#checkbox-sub').is(":checked")) {
                   if ($(this).data("sub").toString() === "true") {
@@ -220,7 +220,25 @@ Drupal.behaviors.isp_module = {
 
   $( '#checkbox-multi').change(function() {
        $('.ssl-cert__item').each(function(index) {
-            if (($('#trust-level').val().toString() != "") || ($('#use').val().toString() != "")) {
+            if ($('#checkbox-sub').is(":checked") && (($('#trust-level').val().toString() != "") || ($('#use').val().toString() != ""))) {
+                if ($('#checkbox-multi').is(":checked")) {
+                if (($(this).data("multi").toString() === "true") && ($(this).hasClass("sub")) && ($(this).hasClass("selected"))) {
+                  $(this).show();
+                  $(this).addClass("multi");
+                } else {
+                  $(this).hide();
+                  $(this).removeClass("multi");
+                }
+              } else {
+                if ($(this).hasClass("sub") && ($(this).hasClass("selected"))) { 
+                  $(this).show() 
+                  $(this).removeClass("multi");
+                } else {
+                  $(this).hide();
+                  $(this).removeClass("multi");
+                }
+              }
+            } else if (($('#trust-level').val().toString() != "") || ($('#use').val().toString() != "")) {
               if ($('#checkbox-multi').is(":checked")) {
                 if (($(this).data("multi").toString() === "true") && ($(this).hasClass("selected"))) {
                   $(this).show();
@@ -247,24 +265,6 @@ Drupal.behaviors.isp_module = {
               } else {
                 if ($(this).hasClass("sub")) { $(this).show() }
                 $(this).removeClass("multi");
-              }
-            } else if ($('#checkbox-sub').is(":checked") && ($('#trust-level').val().toString() != "") || ($('#use').val().toString() != "")) {
-                if ($('#checkbox-multi').is(":checked")) {
-                if (($(this).data("multi").toString() === "true") && ($(this).hasClass("sub")) && ($(this).hasClass("selected"))) {
-                  $(this).show();
-                  $(this).addClass("multi");
-                } else {
-                  $(this).hide();
-                  $(this).removeClass("multi");
-                }
-              } else {
-                if ($(this).hasClass("sub") && ($(this).hasClass("selected"))) { 
-                  $(this).show() 
-                  $(this).removeClass("multi");
-                } else {
-                  $(this).hide();
-                  $(this).removeClass("multi");
-                }
               }
             } else {
               if ($('#checkbox-multi').is(":checked")) {
